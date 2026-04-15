@@ -149,26 +149,32 @@ export function Booking() {
             <Elements 
               stripe={stripePromise} 
               options={{ 
-                clientSecret: paymentData.clientSecret, 
-                locale: 'pl',
-                appearance: { 
-                  theme: 'night', 
-                  variables: { 
-                    colorPrimary: '#dff3ff',
-                    colorBackground: 'rgba(255, 255, 255, 0.05)',
-                    colorText: '#f8f9fa',
-                    colorDanger: '#ff6b6b',
-                    fontFamily: 'Inter, sans-serif',
-                    spacingUnit: '4px',
-                    borderRadius: '12px'
-                  },
-                  rules: {
-                    tabIconSelectedColor: '#0f172a',
-                    tabIconColor: '#94a3b8',
-                    tabIconHoverColor: '#dff3ff'
-                  }
-                } 
-              }}
+                  clientSecret: paymentData.clientSecret, 
+                  locale: 'pl',
+                  appearance: { 
+                    theme: 'night', 
+                    variables: { 
+                      colorPrimary: '#dff3ff',
+                      colorBackground: 'rgba(255, 255, 255, 0.05)',
+                      colorText: '#f8f9fa',
+                      colorDanger: '#ff6b6b',
+                      fontFamily: 'Inter, sans-serif',
+                      spacingUnit: '4px',
+                      borderRadius: '12px'
+                    },
+                    rules: {
+                      '.TabIcon--selected': {
+                        color: '#0f172a'
+                      },
+                      '.TabIcon': {
+                        color: '#94a3b8'
+                      },
+                      '.TabIcon:hover': {
+                        color: '#dff3ff'
+                      }
+                    }
+                  } 
+                }}
             >
               <div className="space-y-12">
                 {/* Guest Details */}
