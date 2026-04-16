@@ -22,7 +22,7 @@ export function Header() {
 
   const navigation = [
     { name: 'O nas', href: '/#about' },
-    { name: 'Pokoje', href: '/rooms' },
+    { name: 'Galeria', href: '/#gallery' },
     { name: 'Kontakt', href: '/#contact' },
   ];
 

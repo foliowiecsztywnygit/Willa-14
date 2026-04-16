@@ -4,7 +4,8 @@ import {
   BedDouble, Wifi, Users, ShieldCheck, ParkingCircle,
   Coffee, MapPin, ArrowRight, Star
 } from 'lucide-react';
-import { BookingWidget } from '../../components/ui/BookingWidget';
+import { PhotoGallery } from '../../components/ui/PhotoGallery';
+import { ContactForm } from '../../components/ui/ContactForm';
 import { Snowfall } from '../../components/ui/Snowfall';
 
 // Subcomponents
@@ -52,27 +53,6 @@ export function Home() {
     { icon: <Wifi className="h-8 w-8" />, title: "Atrakcyjne ceny i darmowe Wi-Fi" },
     { icon: <Coffee className="h-8 w-8" />, title: "Przyjazna, domowa atmosfera" },
     { icon: <ParkingCircle className="h-8 w-8" />, title: "Wygodny, bezpłatny parking" },
-  ];
-
-  const rooms = [
-    {
-      id: "11111111-1111-1111-1111-111111111111",
-      name: "Pokój Standard z Widokiem",
-      tags: ["widok na tatry", "dla par"],
-      image: "/src/assets/gallery/321097405.jpg",
-    },
-    {
-      id: "22222222-2222-2222-2222-222222222222",
-      name: "Rodzinne Studio z Balkonem",
-      tags: ["przestronne", "dla rodzin"],
-      image: "/src/assets/gallery/321097410.jpg",
-    },
-    {
-      id: "33333333-3333-3333-3333-333333333333",
-      name: "Apartament Salwatoriański Premium",
-      tags: ["aneks kuchenny", "nowoczesny"],
-      image: "/src/assets/gallery/449668426.jpg",
-    }
   ];
 
   const reviews = [
@@ -130,26 +110,19 @@ export function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <button 
-              onClick={() => scrollTo('booking-section')}
+              onClick={() => scrollTo('gallery')}
               className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden rounded-full bg-white/10 border border-white/20 hover:border-ice backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_25px_rgba(223,243,255,0.4)]"
             >
-              <span className="relative text-white font-medium tracking-wider uppercase text-sm z-10">Zarezerwuj pobyt</span>
+              <span className="relative text-white font-medium tracking-wider uppercase text-sm z-10">Zobacz galerię</span>
               <div className="absolute inset-0 bg-gradient-to-r from-ice/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             <button 
-              onClick={() => scrollTo('rooms-section')}
+              onClick={() => scrollTo('contact')}
               className="group inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent text-silver-light hover:text-white font-medium tracking-wider uppercase text-sm transition-all duration-300"
             >
-              Zobacz pokoje <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              Zapytaj o nocleg <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-        </div>
-      </section>
-
-      {/* BOOKING WIDGET */}
-      <section id="booking-section" className="py-8 md:py-16 bg-navy relative z-30 -mt-10 md:-mt-20">
-        <div className="container mx-auto px-4 relative">
-          <BookingWidget />
         </div>
       </section>
 
@@ -173,48 +146,11 @@ export function Home() {
         </div>
       </section>
 
-      {/* POKOJE */}
-      <section id="rooms-section" className="py-24 bg-navy relative">
+      {/* GALERIA */}
+      <section id="gallery" className="py-24 bg-navy relative border-t border-white/5">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-            <SectionHeading title="Twoja przestrzeń do relaksu" subtitle="Wybierz pokój idealnie dopasowany do Twoich potrzeb." />
-            <Link to="/rooms" className="hidden md:flex items-center gap-2 text-ice font-medium hover:text-white transition-colors uppercase tracking-widest text-sm pb-2">
-              Zobacz wszystkie pokoje <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {rooms.map((room) => (
-              <Link to={`/room/${room.id}`} key={room.id} className="group relative rounded-2xl overflow-hidden aspect-[4/5] block bg-navy-dark border border-white/5 hover:border-ice/30 transition-all duration-500">
-                <img 
-                  src={room.image} 
-                  alt={room.name} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
-
-                <div className="absolute bottom-0 left-0 p-8 w-full flex flex-col justify-end">
-                  <h3 className="text-2xl font-heading font-bold text-white mb-3 drop-shadow-md group-hover:text-ice transition-colors">{room.name}</h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {room.tags.map(tag => (
-                      <span key={tag} className="text-xs uppercase tracking-wider bg-white/10 backdrop-blur-sm text-ice-light px-2 py-1 rounded-sm border border-white/10">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center text-ice text-sm uppercase tracking-widest font-semibold mt-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    Szczegóły <ArrowRight className="ml-2 h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          
-          <div className="mt-12 text-center md:hidden">
-            <Link to="/rooms" className="inline-flex items-center gap-2 text-ice font-medium hover:text-white transition-colors uppercase tracking-widest text-sm">
-              Zobacz wszystkie <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <SectionHeading title="Nasza Galeria" subtitle="Zajrzyj do wnętrz Willi 14 i poczuj wyjątkowy klimat Zakopanego." />
+          <PhotoGallery />
         </div>
       </section>
 
@@ -292,39 +228,13 @@ export function Home() {
         </div>
       </section>
 
-      {/* CTA (NA DOLE) */}
-      <section className="relative py-32 overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/hero.png" 
-            alt="Zimowa noc" 
-            className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy-dark/90"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-8 drop-shadow-lg">
-            Gotowy na niezapomniany pobyt w górach?
-          </h2>
-          <button 
-            onClick={() => scrollTo('booking-section')}
-            className="group relative inline-flex items-center justify-center px-10 py-5 overflow-hidden rounded-full bg-ice text-navy font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(223,243,255,0.5)] hover:shadow-[0_0_40px_rgba(223,243,255,0.8)] transition-all duration-300"
-          >
-            <span className="relative z-10 flex items-center gap-2">Sprawdź dostępność <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" /></span>
-          </button>
+      {/* KONTAKT (Zastępuje dawne CTA) */}
+      <section id="contact" className="py-24 bg-navy-dark relative border-t border-white/5">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <SectionHeading title="Skontaktuj się z nami" subtitle="Masz pytania dotyczące pobytu? Jesteśmy do Twojej dyspozycji." />
+          <ContactForm />
         </div>
       </section>
-
-      {/* Sticky Mobile CTA */}
-      <div className="md:hidden fixed bottom-4 left-4 right-4 z-50 pointer-events-none">
-        <button 
-          onClick={() => scrollTo('booking-section')}
-          className="w-full pointer-events-auto bg-ice/90 backdrop-blur-xl text-navy font-bold py-4 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/50 uppercase tracking-widest text-sm flex justify-center items-center gap-2 active:scale-95 transition-transform"
-        >
-          Sprawdź dostępność <ArrowRight className="h-4 w-4" />
-        </button>
-      </div>
 
     </div>
   );

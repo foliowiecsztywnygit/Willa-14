@@ -32,7 +32,7 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-6 font-heading text-xl tracking-wider uppercase">Na skróty</h3>
             <ul className="space-y-3">
               <li><Link to="/#about" className="hover:text-ice transition-colors text-sm uppercase tracking-widest font-light">O nas</Link></li>
-              <li><Link to="/rooms" className="hover:text-ice transition-colors text-sm uppercase tracking-widest font-light">Pokoje</Link></li>
+              <li><Link to="/#gallery" className="hover:text-ice transition-colors text-sm uppercase tracking-widest font-light">Galeria</Link></li>
               <li><Link to="/#contact" className="hover:text-ice transition-colors text-sm uppercase tracking-widest font-light">Kontakt</Link></li>
             </ul>
           </div>
