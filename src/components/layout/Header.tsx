@@ -41,14 +41,14 @@ export function Header() {
     >
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className={cn(
+        <a href="/" className={cn(
           "flex items-center transition-all duration-300",
           isTransparent 
             ? "drop-shadow-md hover:opacity-80" 
             : "hover:opacity-80"
         )}>
           <img src="/logo.png" alt="Willa 14 Zakopane" className="h-12 w-auto" />
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
