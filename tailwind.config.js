@@ -38,8 +38,10 @@ export default {
         'snowfall': 'snowfall 10s linear infinite',
         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
         'glow-pulse': 'glowPulse 3s infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'scroll-left': 'scrollLeft 30s linear infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'scroll-left': 'scrollLeft 40s linear infinite',
+        'spin-slow': 'spin-slow 40s linear infinite',
+        'spin-slow-reverse': 'spin-slow-reverse 40s linear infinite',
       },
       keyframes: {
         snowfall: {
@@ -61,6 +63,14 @@ export default {
         scrollLeft: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'spin-slow-reverse': {
+          '0%': { transform: 'rotate(360deg)' },
+          '100%': { transform: 'rotate(0deg)' },
         },
       },
     },

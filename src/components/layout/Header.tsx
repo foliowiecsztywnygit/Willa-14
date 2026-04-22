@@ -44,8 +44,8 @@ export function Header() {
         <a href="/" className={cn(
           "flex items-center transition-all duration-300",
           isTransparent 
-            ? "drop-shadow-md hover:opacity-80" 
-            : "hover:opacity-80"
+            ? "drop-shadow-md hover:opacity-80 scale-125 origin-left" 
+            : "hover:opacity-80 scale-125 origin-left"
         )}>
           <img src="/logo.png" alt="Willa 14 Zakopane" className="h-12 w-auto" />
         </a>
@@ -73,17 +73,29 @@ export function Header() {
 
         {/* CTA Button (Desktop) */}
         <div className="hidden md:block">
-          <Link
-            to="/rooms"
+          <a
+            href="/#contact"
             className={cn(
-              "px-8 py-3 rounded-full font-medium transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(223,243,255,0.2)] hover:shadow-[0_0_25px_rgba(223,243,255,0.6)]",
+              "px-8 py-3 rounded-full font-medium transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(223,243,255,0.2)] hover:shadow-[0_0_25px_rgba(223,243,255,0.6)] inline-block",
               isTransparent 
                 ? "bg-white/10 backdrop-blur-md text-white border border-white/20 hover:border-ice" 
                 : "bg-ice text-navy hover:bg-white"
             )}
+            onClick={(e) => {
+              if (isHome) {
+                e.preventDefault();
+                const element = document.getElementById('contact');
+                if (element) {
+                  const headerOffset = 80;
+                  const elementPosition = element.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+              }
+            }}
           >
-            Rezerwuj
-          </Link>
+            Zapytaj o rezerwację
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -103,25 +115,54 @@ export function Header() {
         <div className="md:hidden bg-navy/95 backdrop-blur-2xl border-t border-white/10 py-6 px-4 shadow-2xl absolute w-full left-0 top-full h-screen">
           <div className="flex flex-col space-y-6">
             {navigation.map((item) => (
-              <Link
+              <a
                 key={item.name}
-                to={item.href}
+                href={item.href}
                 className={cn(
                   "text-lg font-medium py-2 uppercase tracking-widest text-center transition-colors",
                   isActive(item.href) ? "text-ice" : "text-silver hover:text-white"
                 )}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  if (isHome && item.href.startsWith('/#')) {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    const elementId = item.href.split('#')[1];
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                      const headerOffset = 80;
+                      const elementPosition = element.getBoundingClientRect().top;
+                      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }
+                  } else {
+                    setIsMenuOpen(false);
+                  }
+                }}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
-            <Link
-              to="/rooms"
-              className="bg-ice text-navy hover:bg-white text-center rounded-full px-6 py-4 mt-6 font-medium uppercase tracking-widest transition-colors shadow-[0_0_20px_rgba(223,243,255,0.4)]"
-              onClick={() => setIsMenuOpen(false)}
+            <a
+              href="/#contact"
+              className="bg-ice text-navy hover:bg-white text-center rounded-full px-6 py-4 mt-6 font-medium uppercase tracking-widest transition-colors shadow-[0_0_20px_rgba(223,243,255,0.4)] block"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    const headerOffset = 80;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                  }
+                } else {
+                  setIsMenuOpen(false);
+                }
+              }}
             >
-              Rezerwuj online
-            </Link>
+              Zapytaj o rezerwację
+            </a>
           </div>
         </div>
       )}

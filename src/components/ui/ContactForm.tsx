@@ -85,10 +85,11 @@ export function ContactForm() {
 
       {/* Formularz */}
       <div className="glass-card p-8 md:p-12 relative border border-white/10 bg-white/5 backdrop-blur-xl rounded-2xl animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-        <h3 className="text-3xl font-heading font-bold text-white mb-2 tracking-wide">Wyślij zapytanie</h3>
-        <p className="text-silver-dark font-light mb-8">Masz pytania o dostępność lub szczegóły oferty? Chętnie pomożemy!</p>
+        <img src="/wzor.png" alt="" className="absolute top-0 right-0 w-[400px] h-[400px] opacity-[0.03] animate-spin-slow pointer-events-none translate-x-1/3 -translate-y-1/3" />
+        <h3 className="text-3xl font-heading font-bold text-white mb-2 tracking-wide relative z-10">Wyślij zapytanie</h3>
+        <p className="text-silver-dark font-light mb-8 relative z-10">Masz pytania o dostępność lub szczegóły oferty? Chętnie pomożemy!</p>
         
-        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <form onSubmit={handleSubmit} className="space-y-6 relative z-10" noValidate>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-xs font-medium text-ice uppercase tracking-widest mb-3">Imię i nazwisko *</label>

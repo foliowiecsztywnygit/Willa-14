@@ -14,7 +14,29 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string 
   <div className="text-center mb-16 animate-fade-in-up">
     <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-wide">{title}</h2>
     {subtitle && <p className="text-silver-dark max-w-2xl mx-auto text-lg">{subtitle}</p>}
-    <div className="mt-6 w-24 h-1 bg-gradient-to-r from-transparent via-ice to-transparent mx-auto rounded-full shadow-[0_0_10px_rgba(223,243,255,0.8)]"></div>
+    <div className="mt-8 flex items-center justify-center opacity-80">
+      <svg width="240" height="24" viewBox="0 0 240 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_8px_rgba(223,243,255,0.4)]">
+        <path d="M20 12 C 50 12, 70 4, 100 12" stroke="url(#grad1)" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M20 12 C 50 12, 70 20, 100 12" stroke="url(#grad1)" strokeWidth="0.5" strokeLinecap="round" opacity="0.5"/>
+        <path d="M220 12 C 190 12, 170 4, 140 12" stroke="url(#grad2)" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M220 12 C 190 12, 170 20, 140 12" stroke="url(#grad2)" strokeWidth="0.5" strokeLinecap="round" opacity="0.5"/>
+        <circle cx="120" cy="12" r="3.5" fill="#dff3ff" opacity="0.9"/>
+        <circle cx="108" cy="12" r="2" fill="#dff3ff" opacity="0.7"/>
+        <circle cx="132" cy="12" r="2" fill="#dff3ff" opacity="0.7"/>
+        <circle cx="98" cy="12" r="1" fill="#dff3ff" opacity="0.5"/>
+        <circle cx="142" cy="12" r="1" fill="#dff3ff" opacity="0.5"/>
+        <defs>
+          <linearGradient id="grad1" x1="20" y1="12" x2="100" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#dff3ff" stopOpacity="0"/>
+            <stop offset="1" stopColor="#dff3ff" stopOpacity="0.8"/>
+          </linearGradient>
+          <linearGradient id="grad2" x1="220" y1="12" x2="140" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#dff3ff" stopOpacity="0"/>
+            <stop offset="1" stopColor="#dff3ff" stopOpacity="0.8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
   </div>
 );
 
@@ -100,6 +122,9 @@ export function Home() {
           <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-navy via-navy/60 to-transparent z-10"></div>
         </div>
 
+        {/* Hero Spinning Logo Pattern */}
+        <img src="/wzor.png" alt="" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] opacity-[0.03] animate-spin-slow-reverse pointer-events-none -translate-x-1/2 -translate-y-1/2 z-10" />
+
         {/* Snowfall Effect (only on larger screens or reduced on mobile if needed, but let's keep it simple) */}
         {!isMobile && <Snowfall />}
 
@@ -128,6 +153,7 @@ export function Home() {
 
       {/* O OBIEKCIE (Benefits grid) */}
       <section id="about" className="py-24 bg-navy relative overflow-hidden">
+        <img src="/wzor.png" alt="" className="absolute top-10 -left-20 w-96 h-96 opacity-5 animate-spin-slow pointer-events-none" />
         {/* Decorative subtle snow in bg */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-ice/5 blur-[120px] rounded-full mix-blend-screen"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -147,8 +173,9 @@ export function Home() {
       </section>
 
       {/* GALERIA */}
-      <section id="gallery" className="py-24 bg-navy relative border-t border-white/5">
-        <div className="container mx-auto px-4">
+      <section id="gallery" className="py-24 bg-navy relative border-t border-white/5 overflow-hidden">
+        <img src="/wzor.png" alt="" className="absolute top-1/2 left-0 w-[500px] h-[500px] opacity-[0.03] animate-spin-slow pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+        <div className="container mx-auto px-4 relative z-10">
           <SectionHeading title="Nasza Galeria" subtitle="Zajrzyj do wnętrz Willi 14 i poczuj wyjątkowy klimat Zakopanego." />
           <PhotoGallery />
         </div>
@@ -156,6 +183,7 @@ export function Home() {
 
       {/* OPINIE GOŚCI */}
       <section className="py-24 bg-navy-dark relative overflow-hidden">
+        <img src="/wzor.png" alt="" className="absolute -bottom-32 right-10 w-[500px] h-[500px] opacity-5 animate-spin-slow-reverse pointer-events-none" />
         <div className="absolute top-0 left-0 w-64 h-64 bg-ice/5 blur-[100px] rounded-full"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-ice/5 blur-[120px] rounded-full"></div>
         
@@ -186,8 +214,9 @@ export function Home() {
       </section>
 
       {/* LOKALIZACJA */}
-      <section className="py-24 bg-navy relative border-t border-white/5">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-navy relative border-t border-white/5 overflow-hidden">
+        <img src="/wzor.png" alt="" className="absolute top-1/4 -right-32 w-[600px] h-[600px] opacity-[0.04] animate-spin-slow pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="lg:w-1/3">
               <SectionHeading title="Wszędzie blisko" subtitle="Zatrzymaj się w sercu Zakopanego, zachowując spokój i ciszę." />
@@ -197,8 +226,8 @@ export function Home() {
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="text-white font-medium text-lg mb-1">Idealna baza wypadowa</h4>
-                    <p className="text-silver-dark font-light">Krótki spacer dzieli Cię od Krupówek i najpiękniejszych górskich szlaków.</p>
+                    <h4 className="text-white font-medium text-lg mb-1">Górski Odpoczynek</h4>
+                    <p className="text-silver-dark font-light">Lokalizacja z dala od zgiełku i gwaru w centrum Zakopanego.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -213,16 +242,15 @@ export function Home() {
               </div>
             </div>
             
-            <div className="lg:w-2/3 w-full h-[400px] rounded-2xl overflow-hidden glass-panel p-2">
-              {/* Dark mode map placeholder or iframe */}
-              <div className="w-full h-full rounded-xl overflow-hidden relative bg-navy-dark flex items-center justify-center border border-white/10">
-                <div className="absolute inset-0 opacity-40 bg-[url('https://maps.wikimedia.org/osm-intl/14/9083/5610.png')] bg-cover bg-center grayscale invert"></div>
-                <div className="absolute inset-0 bg-navy/60 mix-blend-multiply"></div>
-                <div className="relative z-10 flex flex-col items-center">
-                  <MapPin className="h-12 w-12 text-ice animate-bounce drop-shadow-[0_0_15px_rgba(223,243,255,0.8)]" />
-                  <span className="mt-2 font-heading font-bold text-xl text-white bg-navy/80 px-4 py-1 rounded-full border border-white/10 backdrop-blur-md">Willa 14 Zakopane</span>
-                </div>
-              </div>
+            <div className="lg:w-2/3 w-full h-[400px] rounded-2xl overflow-hidden glass-panel p-2 relative group">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.8643430450757!2d19.977513777069266!3d49.29479636989566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4715f2f0018b7c5b%3A0xf375133c888772c4!2sWilla%2014!5e1!3m2!1spl!2spl!4v1776883815011!5m2!1spl!2spl" 
+                className="w-full h-full rounded-xl opacity-90 group-hover:opacity-100 transition-opacity duration-500" 
+                style={{border: 0}} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -240,4 +268,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default Home; // Exporting Home component

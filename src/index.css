@@ -33,11 +33,91 @@
 }
 
 .glass-card {
-  @apply bg-navy-light/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 transition-all duration-500;
+  @apply bg-navy-light/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 transition-all duration-500 relative;
 }
 
 .glass-card:hover {
   @apply border-ice/30 shadow-[0_0_20px_rgba(223,243,255,0.15)] -translate-y-1 bg-navy-light/60;
+}
+
+/* Ornamental Corners for Cards - Soft Cottage Style */
+.glass-card::before,
+.glass-card::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.3;
+  z-index: 10;
+}
+
+.glass-card::before {
+  top: 12px;
+  left: 12px;
+  border-top-color: theme('colors.ice.DEFAULT');
+  border-left-color: theme('colors.ice.DEFAULT');
+  border-top-left-radius: 24px; /* Soft flowing curve */
+}
+
+.glass-card::after {
+  bottom: 12px;
+  right: 12px;
+  border-bottom-color: theme('colors.ice.DEFAULT');
+  border-right-color: theme('colors.ice.DEFAULT');
+  border-bottom-right-radius: 24px; /* Soft flowing curve */
+}
+
+.glass-card:hover::before,
+.glass-card:hover::after {
+  width: 50px;
+  height: 50px;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 4px rgba(223, 243, 255, 0.4));
+}
+
+/* Ornamental Image Frame - Soft Cottage Style */
+.ornament-frame {
+  @apply relative overflow-hidden;
+}
+
+.ornament-frame::before,
+.ornament-frame::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  z-index: 20;
+}
+
+.ornament-frame::before {
+  top: 20px;
+  left: 20px;
+  border-top-color: theme('colors.white');
+  border-left-color: theme('colors.white');
+  border-top-left-radius: 30px;
+}
+
+.ornament-frame::after {
+  bottom: 20px;
+  right: 20px;
+  border-bottom-color: theme('colors.white');
+  border-right-color: theme('colors.white');
+  border-bottom-right-radius: 30px;
+}
+
+.ornament-frame:hover::before,
+.ornament-frame:hover::after {
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  opacity: 0.5;
+  border-radius: 24px;
 }
 
 /* Scrollbar styling for winter theme */

@@ -48,7 +48,7 @@ export function Surroundings() {
             <h2 className="text-4xl font-heading font-bold text-gray-800 mb-6 tracking-wider">Okolica Willi</h2>
             <DecorativeLine className="mb-8 justify-start w-1/2" />
             <p className="text-gray-600 font-light text-lg mb-10 leading-relaxed">
-              Willa 14 Zakopane to idealna baza wypadowa. Zaledwie kilka minut spacerem dzieli Cię od najważniejszych atrakcji Zakopanego. Bliskość Krupówek, Aqua Parku i szlaków turystycznych sprawia, że każdy dzień możesz spędzić inaczej.
+              Willa Rysy znajduje się na obrzeżach Zakopanego, pozwala na spokojny pobyt zdala od zgiełku i gwaru.
             </p>
 
             <div className="space-y-8">
