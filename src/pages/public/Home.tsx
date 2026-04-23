@@ -235,7 +235,7 @@ export function Home() {
                     <BedDouble className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="text-white font-medium text-lg mb-1">Odpoczynek po pełnym dniu</h4>
+                    <h4 className="text-white font-medium text-lg mb-1">Idealna baza wypadowa</h4>
                     <p className="text-silver-dark font-light">Domowa atmosfera, w której szybko zregenerujesz siły po górskich wędrówkach.</p>
                   </div>
                 </div>
