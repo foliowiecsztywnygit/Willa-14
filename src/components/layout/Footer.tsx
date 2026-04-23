@@ -4,7 +4,7 @@ import { siteConfig } from '../../config/content';
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-navy-dark text-silver pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
+    <footer id="contact" className="bg-navy-dark text-silver pt-24 pb-24 md:pb-12 border-t border-white/5 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ice/20 to-transparent"></div>
       
       <div className="container mx-auto px-4 relative z-10">

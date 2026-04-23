@@ -30,7 +30,7 @@ export function Layout() {
   }, [location]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-navy relative overflow-x-hidden">
       <Header />
       <main className={cn("flex-grow", !isHome && "pt-20")}>
         <Outlet />
@@ -39,28 +39,24 @@ export function Layout() {
       
       {/* Mobile Sticky CTA - Zapytaj o rezerwację */}
       {isHome && (
-        <>
-          <div className="md:hidden fixed bottom-4 left-4 right-4 z-50 pointer-events-none">
-            <a 
-              href="#contact" 
-              className="w-full pointer-events-auto bg-ice/90 backdrop-blur-xl text-navy font-bold py-4 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/50 uppercase tracking-widest text-sm flex justify-center items-center gap-2 active:scale-95 transition-transform"
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('contact');
-                if (element) {
-                  const headerOffset = 80;
-                  const elementPosition = element.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                }
-              }}
-            >
-              Zapytaj o rezerwację
-            </a>
-          </div>
-          {/* Spacer for mobile sticky CTA */}
-          <div className="h-24 md:hidden" />
-        </>
+        <div className="md:hidden fixed bottom-4 left-4 right-4 z-[100]">
+          <a 
+            href="#contact" 
+            className="w-full bg-ice/90 backdrop-blur-xl text-navy font-bold py-4 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/50 uppercase tracking-widest text-sm flex justify-center items-center gap-2 active:scale-95 transition-transform"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('contact');
+              if (element) {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
+            }}
+          >
+            Zapytaj o rezerwację
+          </a>
+        </div>
       )}
     </div>
   );

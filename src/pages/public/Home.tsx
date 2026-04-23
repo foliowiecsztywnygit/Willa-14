@@ -257,7 +257,7 @@ export function Home() {
       </section>
 
       {/* KONTAKT (Zastępuje dawne CTA) */}
-      <section id="contact" className="py-24 bg-navy-dark relative border-t border-white/5">
+      <section id="contact" className="py-24 bg-navy-dark relative border-t border-white/5 pb-32 md:pb-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <SectionHeading title="Skontaktuj się z nami" subtitle="Masz pytania dotyczące pobytu? Jesteśmy do Twojej dyspozycji." />
           <ContactForm />
