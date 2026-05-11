@@ -10,6 +10,7 @@ import FormData from 'form-data';
 import Mailgun from 'mailgun.js';
 import https from 'https';
 import http from 'http';
+import viteCompression from 'vite-plugin-compression';
 
 // Wczytywanie zmiennych z plików .env
 dotenv.config({ path: path.resolve(__dirname, '.env.local') });
@@ -535,6 +536,31 @@ function localStripeBackend() {
 export default defineConfig({
   build: {
     sourcemap: 'hidden',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'vendor-react';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('stripe') || id.includes('supabase')) {
+              return 'vendor-services';
+            }
+            return 'vendor';
+          }
+        }
+      }
+    }
   },
   plugins: [
     react({
@@ -544,16 +570,9 @@ export default defineConfig({
         ],
       },
     }),
-    // traeBadgePlugin({
-    //   variant: 'dark',
-    //   position: 'bottom-right',
-    //   prodOnly: true,
-    //   clickable: true,
-    //   clickUrl: 'https://www.trae.ai/solo?showJoin=1',
-    //   autoTheme: true,
-    //   autoThemeTarget: '#root'
-    // }), 
     tsconfigPaths(),
+    viteCompression({ algorithm: 'gzip', ext: '.gz' }),
+    viteCompression({ algorithm: 'brotliCompress', ext: '.br' }),
     localStripeBackend() // Podpinamy nasz lokalny backend
   ],
 })

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   BedDouble, Wifi, Users, ShieldCheck, ParkingCircle,
-  Coffee, MapPin, ArrowRight, Star
+  Coffee, MapPin, ArrowRight, Star, CheckCircle, CreditCard, Gift, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { PhotoGallery } from '../../components/ui/PhotoGallery';
 import { ContactForm } from '../../components/ui/ContactForm';
@@ -43,9 +43,22 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string 
 export function Home() {
   const [mousePos, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Ustawienie meta tagów dla SEO
+    document.title = "Klimatyczna Willa w Zakopanem - Noclegi blisko natury | Willa 14";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Szukasz idealnego noclegu w Zakopanem? Wybierz Willa 14. Komfortowe pokoje, pyszne śniadania i świetna lokalizacja. Zarezerwuj pobyt najtaniej tutaj!");
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = "description";
+      meta.content = "Szukasz idealnego noclegu w Zakopanem? Wybierz Willa 14. Komfortowe pokoje, pyszne śniadania i świetna lokalizacja. Zarezerwuj pobyt najtaniej tutaj!";
+      document.head.appendChild(meta);
+    }
+    
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -100,19 +113,75 @@ export function Home() {
     }
   ];
 
+  const faqs = [
+    {
+      question: "Czy obiekt akceptuje zwierzęta?",
+      answer: "Tak, jesteśmy obiektem przyjaznym zwierzętom. Prosimy jednak o wcześniejszą informację podczas rezerwacji."
+    },
+    {
+      question: "O której godzinie zaczyna się doba hotelowa?",
+      answer: "Doba hotelowa rozpoczyna się o godzinie 15:00 w dniu przyjazdu, a kończy o godzinie 11:00 w dniu wyjazdu."
+    },
+    {
+      question: "Czy dostępny jest parking?",
+      answer: "Tak, dla naszych gości zapewniamy bezpłatny, monitorowany parking bezpośrednio przy obiekcie."
+    },
+    {
+      question: "Czy w cenie wliczone jest śniadanie?",
+      answer: "Oferujemy pobyty ze śniadaniem (w formie bufetu) oraz bez. Opcję można wybrać podczas rezerwacji na naszej stronie."
+    }
+  ];
+
+  const lodgingSchema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Willa 14",
+    "description": "Klimatyczna Willa w Zakopanem - komfortowe pokoje, świetna lokalizacja, darmowy parking i wi-fi.",
+    "url": "https://willa14.pl",
+    "telephone": "+48 123 456 789", 
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. Przykładowa 14",
+      "addressLocality": "Zakopane",
+      "postalCode": "34-500",
+      "addressCountry": "PL"
+    },
+    "image": "https://willa14.pl/hero.png",
+    "priceRange": "$$"
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-navy text-silver-light font-sans selection:bg-ice/30 selection:text-white">
+      {/* SEO Schema.org */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(lodgingSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       
       {/* HERO SECTION */}
       <section 
         ref={heroRef}
+        onMouseMove={handleMouseMove}
         className="relative h-[80vh] md:h-screen min-h-[500px] md:min-h-[700px] flex items-center justify-center overflow-hidden"
       >
         <div className="absolute inset-0 z-0 overflow-hidden bg-navy">
           <img 
             src="/hero.png" 
-            alt="Willa 14 w zimowej scenerii" 
+            alt="Willa 14 w zimowej scenerii - noclegi blisko natury w Zakopanem" 
             className="absolute top-0 left-0 w-full h-full object-cover opacity-90"
+            loading="eager"
+            fetchPriority="high"
           />
           {/* Subtle building glow & haze */}
           <div className="absolute inset-0 bg-gradient-radial from-ice/10 via-transparent to-transparent blur-3xl opacity-50 mix-blend-screen"></div>
@@ -123,15 +192,15 @@ export function Home() {
         </div>
 
         {/* Hero Spinning Logo Pattern */}
-        <img src="/wzor.png" alt="" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] opacity-[0.03] animate-spin-slow-reverse pointer-events-none -translate-x-1/2 -translate-y-1/2 z-10" />
+        <img src="/wzor.webp" alt="" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] opacity-[0.03] animate-spin-slow-reverse pointer-events-none -translate-x-1/2 -translate-y-1/2 z-10" loading="lazy" />
 
-        {/* Snowfall Effect (only on larger screens or reduced on mobile if needed, but let's keep it simple) */}
-        {!isMobile && <Snowfall />}
+        {/* Snowfall Effect (Optimized Canvas-based) */}
+        <Snowfall />
 
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto pt-10 md:pt-20 flex flex-col items-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-wide drop-shadow-[0_0_20px_rgba(223,243,255,0.4)] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>Willa 14 Zakopane – Twój dom w górach</h1>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-wide drop-shadow-[0_0_20px_rgba(223,243,255,0.4)] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>Klimatyczna Willa w Zakopanem – Twój idealny wypoczynek</h1>
           <p className="text-lg md:text-2xl text-ice-light mb-10 max-w-3xl mx-auto font-light tracking-wide drop-shadow-md animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            Poczuj prawdziwą gościnność. Czyste pokoje, świetna lokalizacja i niezapomniany wypoczynek.
+            Poczuj prawdziwą gościnność. Czyste pokoje, świetna lokalizacja i niezapomniany relaks blisko natury.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <button 
@@ -151,9 +220,38 @@ export function Home() {
         </div>
       </section>
 
+      {/* BOOK DIRECT BENEFITS */}
+      <section className="py-12 bg-navy-dark relative border-y border-white/5 z-20 shadow-xl">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 p-4 glass-panel rounded-xl justify-center md:justify-start">
+              <CreditCard className="h-10 w-10 text-ice flex-shrink-0" />
+              <div>
+                <h3 className="text-white font-medium">Gwarancja Najniższej Ceny</h3>
+                <p className="text-sm text-silver-dark font-light">Rezerwując tutaj oszczędzasz</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 p-4 glass-panel rounded-xl justify-center md:justify-start">
+              <CheckCircle className="h-10 w-10 text-ice flex-shrink-0" />
+              <div>
+                <h3 className="text-white font-medium">Elastyczna Anulacja</h3>
+                <p className="text-sm text-silver-dark font-light">Bezpieczeństwo Twoich planów</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 p-4 glass-panel rounded-xl justify-center md:justify-start">
+              <Gift className="h-10 w-10 text-ice flex-shrink-0" />
+              <div>
+                <h3 className="text-white font-medium">Powitalna Niespodzianka</h3>
+                <p className="text-sm text-silver-dark font-light">Tylko przy rezerwacji bezpośredniej</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* O OBIEKCIE (Benefits grid) */}
       <section id="about" className="py-24 bg-navy relative overflow-hidden">
-        <img src="/wzor.png" alt="" className="absolute top-10 -left-20 w-96 h-96 opacity-5 animate-spin-slow pointer-events-none" />
+        <img src="/wzor.webp" alt="" className="absolute top-10 -left-20 w-96 h-96 opacity-5 animate-spin-slow pointer-events-none" loading="lazy" />
         {/* Decorative subtle snow in bg */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-ice/5 blur-[120px] rounded-full mix-blend-screen"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -174,7 +272,7 @@ export function Home() {
 
       {/* GALERIA */}
       <section id="gallery" className="py-24 bg-navy relative border-t border-white/5 overflow-hidden">
-        <img src="/wzor.png" alt="" className="absolute top-1/2 left-0 w-[500px] h-[500px] opacity-[0.03] animate-spin-slow pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+        <img src="/wzor.webp" alt="" className="absolute top-1/2 left-0 w-[500px] h-[500px] opacity-[0.03] animate-spin-slow pointer-events-none -translate-x-1/2 -translate-y-1/2" loading="lazy" />
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeading title="Nasza Galeria" subtitle="Zajrzyj do wnętrz Willi 14 i poczuj wyjątkowy klimat Zakopanego." />
           <PhotoGallery />
@@ -183,7 +281,7 @@ export function Home() {
 
       {/* OPINIE GOŚCI */}
       <section className="py-24 bg-navy-dark relative overflow-hidden">
-        <img src="/wzor.png" alt="" className="absolute -bottom-32 right-10 w-[500px] h-[500px] opacity-5 animate-spin-slow-reverse pointer-events-none" />
+        <img src="/wzor.webp" alt="" className="absolute -bottom-32 right-10 w-[500px] h-[500px] opacity-5 animate-spin-slow-reverse pointer-events-none" loading="lazy" />
         <div className="absolute top-0 left-0 w-64 h-64 bg-ice/5 blur-[100px] rounded-full"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-ice/5 blur-[120px] rounded-full"></div>
         
@@ -200,7 +298,7 @@ export function Home() {
                   </div>
                   <p className="text-silver-light italic mb-6 font-light leading-relaxed flex-grow">"{review.text}"</p>
                   <div className="flex items-center gap-4 mt-auto">
-                    <img src={review.avatar} alt={review.author} className="w-10 h-10 rounded-full border border-white/20" />
+                    <img src={review.avatar} alt={`Opinia gościa ${review.author}`} loading="lazy" className="w-10 h-10 rounded-full border border-white/20" />
                     <span className="font-medium text-white">{review.author}</span>
                   </div>
                 </div>
@@ -215,7 +313,7 @@ export function Home() {
 
       {/* LOKALIZACJA */}
       <section className="py-24 bg-navy relative border-t border-white/5 overflow-hidden">
-        <img src="/wzor.png" alt="" className="absolute top-1/4 -right-32 w-[600px] h-[600px] opacity-[0.04] animate-spin-slow pointer-events-none" />
+        <img src="/wzor.webp" alt="" className="absolute top-1/4 -right-32 w-[600px] h-[600px] opacity-[0.04] animate-spin-slow pointer-events-none" loading="lazy" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="lg:w-1/3">
@@ -256,6 +354,40 @@ export function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-24 bg-navy relative border-t border-white/5 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10 max-w-4xl">
+          <SectionHeading title="Najczęściej zadawane pytania" subtitle="Znajdź odpowiedzi na najważniejsze pytania przed przyjazdem." />
+          <div className="mt-12 space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="glass-card overflow-hidden transition-all duration-300"
+              >
+                <button 
+                  className="w-full flex items-center justify-between text-left focus:outline-none p-2"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <h3 className="text-white font-medium text-lg pr-8">{faq.question}</h3>
+                  {openFaq === index ? (
+                    <ChevronUp className="h-6 w-6 text-ice flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="h-6 w-6 text-ice flex-shrink-0" />
+                  )}
+                </button>
+                <div 
+                  className={`transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0 overflow-hidden'}`}
+                >
+                  <p className="text-silver-dark font-light px-2 pb-2 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* KONTAKT (Zastępuje dawne CTA) */}
       <section id="contact" className="py-24 bg-navy-dark relative border-t border-white/5 pb-32 md:pb-24">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -263,6 +395,16 @@ export function Home() {
           <ContactForm />
         </div>
       </section>
+
+      {/* STICKY MOBILE CTA */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-navy/90 backdrop-blur-md border-t border-white/10 p-4 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
+        <button 
+          onClick={() => scrollTo('contact')}
+          className="w-full flex items-center justify-center gap-2 bg-ice text-navy font-bold py-3 rounded-full uppercase tracking-wide text-sm hover:bg-white transition-colors shadow-[0_0_15px_rgba(223,243,255,0.3)]"
+        >
+          Zarezerwuj teraz <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
 
     </div>
   );

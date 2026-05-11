@@ -2,10 +2,20 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/wzor.png" />
+    <link rel="icon" type="image/webp" href="/wzor.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Willa 14 - Zakopane</title>
     <meta name="description" content="Willa 14 w sercu Zakopanego. Poczuj prawdziwą gościnność i domowy klimat. Komfortowe pokoje, świetna lokalizacja i wyjątkowa atmosfera czekają na Ciebie.">
+    
+    <!-- Resource Hints for faster initial load -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="preconnect" href="https://ui-avatars.com" />
+    <link rel="dns-prefetch" href="https://ui-avatars.com" />
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+
     <script type="module">
       if (import.meta.hot?.on) {
         import.meta.hot.on('vite:error', (error) => {

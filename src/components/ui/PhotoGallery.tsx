@@ -33,7 +33,7 @@ export function PhotoGallery() {
 
   return (
     <div className="relative">
-      <img src="/wzor.png" alt="" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] opacity-[0.02] animate-spin-slow pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+      <img src="/wzor.webp" alt="" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] opacity-[0.02] animate-spin-slow pointer-events-none -translate-x-1/2 -translate-y-1/2" loading="lazy" />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 relative z-10">
         {imageUrls.map((url, index) => (
           <div 
